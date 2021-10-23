@@ -1,0 +1,99 @@
+/* Code for check browser*/
+<?php
+        $devicecheck= is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']),"mobile"));
+        $devicecheck_android= is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']),"android"));
+        $devicecheck_ios= is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']),"iphone"));
+        
+        if($devicecheck == 1 || $devicecheck_ios==1) { ?>
+        
+         <script>  
+           Swal.fire({
+              title: '<strong>You Are Using Ios</strong>',  
+              icon: 'info',
+              html:
+                'You Can Download Ios <b>App</b>, ' +
+                '<a href="https://play.google.com/store/apps/details?id=com.rajdiwan.live4u"><b>Download link<b></a> ',
+              showCloseButton: true,
+              showCancelButton: true,
+              focusConfirm: false,
+              confirmButtonText:
+              showCancelButton: true,
+             confirmButtonText: 'okk!' 
+            })
+            
+         </script>
+         
+        <?php } if($devicecheck == 1 || $devicecheck_android == 1){ ?>
+            <script>
+                Swal.fire({
+              title: '<strong>You Are Using Andriod</strong>', 
+              icon: 'info',
+              html:
+                'You can download Android <b>App</b>,' +
+                '<a href="https://play.google.com/store/apps/details?id=com.rajdiwan.live4u"><b>Download link<b></a> ',
+              showCloseButton: true,
+              showCancelButton: true,
+              focusConfirm: false,
+              showCancelButton: true,
+             confirmButtonText: 'okk!'
+            })
+            </script>
+        <?php } ?>
+        
+            <!--<script>-->
+            <!--Swal.fire({-->
+            <!--  title: '<strong>You Are Using Browser</strong>',-->
+            <!--  icon: 'info',-->
+            <!--  html:-->
+            <!--    'You can download mobile app <b>App</b>, ' +-->
+            <!--    '<a href="https://live4u.in/"><b>Download link<b></a> ',-->
+            <!--  showCloseButton: true,-->
+            <!--  showCancelButton: true,-->
+            <!--  focusConfirm: false,-->
+            <!-- showCancelButton: true,-->
+            <!-- confirmButtonText: 'okk!'-->
+            <!--})-->
+            <!--</script>-->
+           
+        <?php //} ?>
+        
+        ////////////////////////Sweat Alert Cdn///////////////////////////
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+
+      ////////////////////////////////////////Sweat Alert Code //////////////////////////////////////////////////////////
+
+swal({
+            title: "" + txt + "",
+            content: span,
+            confirmButtonText: "V redu", 
+            allowOutsideClick: "true" 
+            }).then(function(){
+                   window.location.href='Calendar.php'; 
+                })
+            
+            
+            $('.copy-text').click(function (e) {
+            //alert();
+            e.preventDefault();
+            var copyText = $(this).attr("data-key");
+            if(typeof copyText ==="undefined")
+            {
+            copyText=$(this).find(".copyCode").first().val();
+            }
+            
+            // Clipboard.copy(copyText);
+            // showToast("Text copied",function(){});
+            navigator.clipboard.writeText(copyText);
+            alert(' Text copied! '+copyText);
+            });
+  
+      ////////////////////////////////////////////////////Image Upload API/////////////////////////////////////////////////////////////////////////////
+        define('UPLOAD_DIR', 'document/');
+        $image_parts = explode(";base64,", $_POST['image']);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = UPLOAD_DIR . uniqid() . '.png';
+        file_put_contents($file, $image_base64);
+  
+  
